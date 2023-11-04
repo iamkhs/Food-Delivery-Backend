@@ -6,13 +6,13 @@ This is the backend REST API of a food delivery application, which allows users 
 
 ## Features
 
+- **REST API**: Provides a RESTful API for seamless communication between the frontend and backend.
+
 - **User Authentication**: Utilizes Spring Security for secure role-based authentication. Users can register, log in, and access their account.
 
 - **Real-time Order Management**: Implements Spring Websocket to enable real-time order management for administrators. Admins can receive and handle orders as they come in.
 
 - **Restaurant Geolocation**: Integrates Google Maps API for geocoding, enabling the system to find the nearest restaurants within a 2km radius.
-
-- **REST API**: Provides a RESTful API for seamless communication between the frontend and backend.
 
 - **Database**: Utilizes Spring Data JPA to interact with a MySQL database for storing user information, orders, and restaurant details, etc.
 
