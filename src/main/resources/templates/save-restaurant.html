@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Restaurant</title>
+    <link rel="icon" type="image/favicon.ico" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="card border-primary shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Add a New Restaurant</h3>
+                    <form th:action="@{save-restaurant}" th:method="post" th:object="${restaurant}"
+                          enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Restaurant Name</label>
+                            <input th:name="name" type="text" class="form-control" id="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categories" class="form-label">Categories</label>
+                            <input th:name="categories" type="text" class="form-control" id="categories">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Contact</label>
+                            <input th:name="contact" type="text" class="form-control" id="contact">
+                        </div>
+                        <div class="mb-3">
+                            <label for="streetAddress" class="form-label">Street Address</label>
+                            <input th:name="streetAddress" type="text" class="form-control" id="streetAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="form-group col-md-4">
+                                <label for="area">Area</label>
+                                <input th:name="area" type="text" class="form-control" id="area">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="city">City</label>
+                                <input th:name="city" type="text" class="form-control" id="city">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="pauroshova">Pauroshova</label>
+                                <input th:name="pauroshova" type="text" class="form-control" id="pauroshova">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="form-group col-md-4">
+                                <label for="district">District</label>
+                                <input th:name="district" type="text" class="form-control" id="district">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="subDistrict">Sub-District</label>
+                                <input th:name="subDistrict" type="text" class="form-control" id="subDistrict">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="postal">Postal Code</label>
+                                <input th:name="postal" type="text" class="form-control" id="postal">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Restaurant Image</label>
+                            <input name="file" type="file" class="form-control" id="image">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
