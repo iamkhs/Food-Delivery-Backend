@@ -2,7 +2,7 @@
 
 # Live link🚀 - https://food-delivery23.netlify.app/
 
-This is the backend of a food delivery application, which allows users to order food. It is built using Java with Spring Boot, and incorporates several technologies and features to provide a seamless food ordering experience.
+This is the backend REST API of a food delivery application, which allows users to order food. It is built using Java with Spring Boot, and incorporates several technologies and features to provide a seamless food ordering experience.
 
 ## Features
 
@@ -12,7 +12,9 @@ This is the backend of a food delivery application, which allows users to order 
 
 - **Restaurant Geolocation**: Integrates Google Maps API for geocoding, enabling the system to find the nearest restaurants within a 2km radius.
 
-- **Database**: Utilizes Spring Data JPA to interact with a MySQL database for storing user information, orders, and restaurant details etc.
+- **REST API**: Provides a RESTful API for seamless communication between the frontend and backend.
+
+- **Database**: Utilizes Spring Data JPA to interact with a MySQL database for storing user information, orders, and restaurant details, etc.
 
 - **Admin Panel**: Administrators have the capability to add, delete, update food items, and accept or decline orders through the admin panel.
 
@@ -25,7 +27,6 @@ This is the backend of a food delivery application, which allows users to order 
 - **Cloudinary Integration**: Utilizes Cloudinary API for storing and managing food images.
 
 - **Deployment**: Hosted on Microsoft Azure cloud for scalability and reliability.
-
 
 ## Technologies Used:
 
