@@ -37,7 +37,7 @@ This is the backend REST API of a food delivery application, which allows users 
 - Spring Security
 - Spring Data JPA
 - MySQL & Redis (for Caching)
-- Google Maps API
+- Google Maps API (for geocoding)
 - Cloudinary API
 
 ### Frontend:
