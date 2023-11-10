@@ -1,5 +1,6 @@
 package com.iamkhs.fooddelivery.exceptions;
 
+import com.iamkhs.fooddelivery.exception.InvalidJwtTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -42,5 +43,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidImageTypeException.class)
     public ResponseEntity<?> invalidImageTypeException(InvalidImageTypeException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidJwtTokenException.class)
+    public ResponseEntity<?> invalidJwtTokenException(InvalidJwtTokenException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }

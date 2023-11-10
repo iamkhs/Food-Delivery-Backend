@@ -1,5 +1,6 @@
 package com.iamkhs.fooddelivery.jwtconfig;
 
+import com.iamkhs.fooddelivery.exception.InvalidJwtTokenException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +39,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 Boolean isValid = jwtUtil.validateToken(token, userDetails);
-                if (isValid && username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+                if (!isValid){
+                    throw new InvalidJwtTokenException("Token is invalid");
+                }
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                     var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
