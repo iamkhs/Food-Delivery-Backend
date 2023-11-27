@@ -54,7 +54,7 @@ public class UserController {
                 userService.deleteUser(savedUser.getId().toString());
                 logger.info("User deleted for not verify his / her account within 5 minutes");
             }
-        }, 30, TimeUnit.SECONDS);
+        }, 5, TimeUnit.MINUTES);
 
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
