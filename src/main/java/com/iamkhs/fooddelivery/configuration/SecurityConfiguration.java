@@ -30,7 +30,7 @@ public class SecurityConfiguration {
     private static final String[] PUBLIC_URL = {
             "/server/**",
             "/food-app/dev/**",
-            "/food-app/api/users/save",
+            "/food-app/api/users/save/**",
             "/food-app/api/auth/generate-token",
     };
 

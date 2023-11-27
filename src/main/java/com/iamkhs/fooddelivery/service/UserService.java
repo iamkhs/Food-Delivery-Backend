@@ -8,10 +8,13 @@ import java.util.List;
 
 public interface UserService {
     // create
-    UserDto saveUser(User user);
+    User saveUser(User user);
 
     // get
     UserDto getUser(String id);
+
+    // verify user
+    boolean isUserVerified(String verificationCode);
 
     // update
     UserDto updateUser(String id, User user);

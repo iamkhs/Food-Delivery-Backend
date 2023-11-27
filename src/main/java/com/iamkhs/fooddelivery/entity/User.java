@@ -45,7 +45,7 @@ public class User implements Serializable {
 
     private Role role;
 
-    private boolean enable = true;
+    private boolean enable;
     private LocalDateTime userRegistrationDate;
     private String verificationCode;
 

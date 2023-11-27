@@ -14,10 +14,10 @@ import com.iamkhs.fooddelivery.repository.UserRepository;
 import com.iamkhs.fooddelivery.service.UserService;
 import com.iamkhs.fooddelivery.utils.ModelMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     private final RestaurantRepository restaurantRepository;
 
     @Override
-    public UserDto saveUser(User user) {
+    public User saveUser(User user) {
 
         Optional<User> userByEmail = this.userRepository.findByEmail(user.getEmail());
 
@@ -49,9 +49,14 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        this.userRepository.save(user);
-        return ModelMapper.userToDto(user);
+        String verificationCode = generateVerificationCode();
+        user.setVerificationCode(verificationCode);
+        return this.userRepository.save(user);
 
+    }
+
+    private String generateVerificationCode(){
+        return UUID.randomUUID().toString();
     }
 
     @Override
@@ -65,6 +70,28 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("User with this id: " + id + " not found!"));
 
         return ModelMapper.userToDto(user);
+    }
+
+    @Override
+    public boolean isUserVerified(String verificationCode) {
+        LocalDateTime currDate = LocalDateTime.now();
+        Optional<User> optionalUser = this.userRepository.findUserByVerificationCode(verificationCode);
+        if (optionalUser.isEmpty()){
+            return false;
+        }
+
+        User user = optionalUser.get();
+        LocalDateTime userRegistrationDate = user.getUserRegistrationDate();
+        long minute = Duration.between(userRegistrationDate, currDate).toMinutes();
+        System.err.println(minute);
+        if (minute <= 5){
+            user.setVerificationCode(null);
+            user.setEnable(true);
+            this.userRepository.save(user);
+            return true;
+        }
+        this.userRepository.delete(user);
+        return false;
     }
 
     private UserDto getUserByEmail(String email) {
@@ -93,7 +120,7 @@ public class UserServiceImpl implements UserService {
 
     // This api for admin panel
     @Override
-    @Cacheable(value = "restaurantByAdmin")
+//    @Cacheable(value = "restaurantByAdmin")
     public RestaurantDto getRestaurantByAdmin(String adminId) {
         Restaurant restaurant = this.restaurantRepository.findRestaurantByRestaurantAdminId(UUID.fromString(adminId))
                 .orElseThrow(()-> new ResourceNotFoundException("Restaurant Not FOUND! with this admin id: "+adminId));
